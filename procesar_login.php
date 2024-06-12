@@ -34,7 +34,7 @@ if ($user) {
         // Contraseña correcta, iniciar sesión
         $_SESSION['user_id'] = $user['ID_USUARIO'];
         $_SESSION['user_nombre'] = $user['NOMBRE'];
-        header("Location: principal.php");
+        header("Location: HTML/index.html");
         exit();
     } else {
         // Contraseña incorrecta
