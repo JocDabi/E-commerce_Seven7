@@ -52,7 +52,7 @@ $stmt_check_email->execute();
 $stmt_check_email->store_result();
 
 if ($stmt_check_email->num_rows > 0) {
-    $errors['email'] = "Este usuario ya está registrado.";
+    $errors['email'] = "Este email ya está registrado.";
 }
 
 $stmt_check_email->close();
