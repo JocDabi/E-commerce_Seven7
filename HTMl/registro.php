@@ -20,7 +20,7 @@ session_start();
         }
     </style>
 
-    <body class="w-[100%] h-screen bg-gradient-to-b from-pink-300 via-pink-200 to-pink-100 overflow-x-hidden overflow-y-hidden">
+    <body class="w-[100%] h-screen bg-gradient-to-b from-pink-300 via-pink-200 to-pink-100 overflow-x-hidden">
         <h1 class="text-center mt-32 text-[2rem] text-[rgb(95,22,24)] font-[600]">Registrarse</h1>
         
         <div class="w-full flex flex-col gap-8 items-center mt-4">
@@ -62,5 +62,12 @@ session_start();
                 <button class="w-36 h-10 rounded-full bg-[rgb(95,22,24)] text-white font-[600]" type="submit">Registrarse</button>
             </form>
         </div>
+
+        <?php
+            // Limpiar los errores después de mostrarlos
+            if (isset($_SESSION['errors'])) {
+                unset($_SESSION['errors']);
+            }
+        ?>
     </body>
     </html>

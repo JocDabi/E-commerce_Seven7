@@ -39,6 +39,24 @@ if (!preg_match("/^(?=.*@(gmail\.com|hotmail\.com|outlook\.com))/", $email)) {
     $errors['email'] = "El email debe tener un dominio válido: @gmail.com, @hotmail.com, @outlook.com";
 }
 
+// Verificar si el email ya está registrado
+$sql_check_email = "SELECT EMAIL FROM usuario WHERE EMAIL = ?";
+$stmt_check_email = $conn->prepare($sql_check_email);
+
+if ($stmt_check_email === false) {
+    die("Error: " . $conn->error);
+}
+
+$stmt_check_email->bind_param("s", $email);
+$stmt_check_email->execute();
+$stmt_check_email->store_result();
+
+if ($stmt_check_email->num_rows > 0) {
+    $errors['email'] = "Este usuario ya está registrado.";
+}
+
+$stmt_check_email->close();
+
 // Si hay errores, redirigir de vuelta al formulario y mostrar los errores
 if (!empty($errors)) {
     $_SESSION['errors'] = $errors;
