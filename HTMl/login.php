@@ -37,7 +37,7 @@ session_start();
             <button class="w-36 h-10 rounded-full bg-[rgb(95,22,24)] text-white font-[600]" type="submit">Acceder</button>
         </form>
         <p class="text-sm text-[rgb(95,22,24)] font-[500]">¿No tienes una cuenta?<a class="underline px-2" href="registro.php">Regístrate</a></p>
-        <p class="text-sm text-[rgb(95,22,24)] font-[500]">¿Olvidaste tu contraseña?<a class="underline px-2" href="../recuperar_contrasena.php">Recupérala aquí</a></p>
+        <p class="text-sm text-[rgb(95,22,24)] font-[500]">¿Olvidaste tu contraseña?<a class="underline px-2" href="../restablecer_contrasena.php">Recupérala aquí</a></p>
     </div>
 
     <?php

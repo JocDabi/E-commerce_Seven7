@@ -18,6 +18,8 @@ $direccion = $_POST['direccion'];
 $email = $_POST['email'];
 $contrasena = $_POST['contrasena'];
 $confirmar_contrasena = $_POST['confirmar_contrasena'];
+$pregunta_id = $_POST['pregunta'];
+$respuesta = $_POST['respuesta'];
 
 // Verificar la coincidencia de las contraseñas
 if ($contrasena !== $confirmar_contrasena) {
@@ -68,7 +70,7 @@ if (!empty($errors)) {
 $hashed_contrasena = password_hash($contrasena, PASSWORD_BCRYPT);
 
 // Crear la consulta SQL para insertar los datos en la tabla de usuarios
-$sql = "INSERT INTO usuario (NOMBRE, APELLIDO, DIRECCION, EMAIL, CONTRASENA) VALUES (?, ?, ?, ?, ?)";
+$sql = "INSERT INTO usuario (NOMBRE, APELLIDO, DIRECCION, EMAIL, CONTRASENA, PREGUNTA_ID, RESPUESTA) VALUES (?, ?, ?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
 
 if ($stmt === false) {
@@ -76,7 +78,7 @@ if ($stmt === false) {
 }
 
 // Bind parameters
-$stmt->bind_param("sssss", $nombre, $apellido, $direccion, $email, $hashed_contrasena);
+$stmt->bind_param("sssssis", $nombre, $apellido, $direccion, $email, $hashed_contrasena, $pregunta_id, $respuesta);
 
 // Ejecutar la consulta
 if ($stmt->execute()) {
