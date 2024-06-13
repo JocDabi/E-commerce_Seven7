@@ -7,7 +7,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar sesion</title>
+    <title>Iniciar sesión</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,7 +36,8 @@ session_start();
             <?php endif; ?>
             <button class="w-36 h-10 rounded-full bg-[rgb(95,22,24)] text-white font-[600]" type="submit">Acceder</button>
         </form>
-        <p class="text-sm text-[rgb(95,22,24)] font-[500]">¿No tienes una cuenta?<a class="underline px-2" href="registro.php">Registrate</a></p>
+        <p class="text-sm text-[rgb(95,22,24)] font-[500]">¿No tienes una cuenta?<a class="underline px-2" href="registro.php">Regístrate</a></p>
+        <p class="text-sm text-[rgb(95,22,24)] font-[500]">¿Olvidaste tu contraseña?<a class="underline px-2" href="../recuperar_contrasena.php">Recupérala aquí</a></p>
     </div>
 
     <?php
