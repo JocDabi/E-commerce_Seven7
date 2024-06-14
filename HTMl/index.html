@@ -3,9 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Inicio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="icon" href="./images/Recurso 1.png">
 </head>
-<body>
-    <h1>Acceso exitoso!</h1>
+
+<style>
+    * {
+        font-family: "Montserrat", sans-serif;
+    }
+
+    nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgb(252, 140, 228);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Placeholder para evitar el solapamiento */
+        .nav-placeholder {
+            height: 68px; 
+        }
+
+        /* Ocultar el menú inicialmente */
+        .menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background: white;
+            border: 1px solid #ccc;
+            width: 200px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* Estilo de los enlaces del menú */
+        .menu a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .menu a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .menu .login-button {
+            text-align: center;
+            background-color: #ee0101;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .menu .login-button:hover {
+            background-color: #b30000;
+        }
+</style>
+
+<body class="w-[100%] h-screen bg-gradient-to-b from-pink-300 via-pink-200 to-pink-100 overflow-x-hidden">
+    <nav>
+        <a class="pt-6 pl-7" href="index.html">
+            <img class="w-[68px] h-[68px]" src="../images/Recurso 1.png" alt=""">
+        </a>
+        <div>
+            <img class="pt-7 pr-6 w-[70px] cursor-pointer menu-toggle" src="../images/menu.png" alt="">
+            <div class="menu">
+                <a href="#">Catálogo</a>
+                <a href="#">Carrito de compras</a>
+                <a href="#">Historial de compras</a>
+                <div class="login-button">Cerrar sesión</div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="w-full h-screen flex justify-content items-center">
+        <h1 class="text-center mt-16 text-[2rem] text-[rgb(95,22,24)] font-[600]"">Bienvenido a Seven7!</h1>
+    </div>
 </body>
+<script>
+    // JavaScript para manejar el clic en el menú hamburguesa
+    document.querySelector('.menu-toggle').addEventListener('click', function() {
+        const menu = document.querySelector('.menu');
+        // Alternar la visibilidad del menú
+        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    });
+</script>
 </html>
