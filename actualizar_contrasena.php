@@ -105,9 +105,9 @@ if (!empty($errors)) {
             <?php echo $success_message; ?>
         </div>
         <form class="flex flex-col items-center gap-8 mt-6">
-            <input class="w-[250px] h-[40px] bg-white/70 outline-0 rounded-full text-center" type="text" name="email" placeholder="Email" value="<?php echo $email; ?>" disabled>
-            <input class="w-[250px] h-[40px] bg-white/70 outline-0 rounded-full text-center" type="password" name="nueva_contrasena" placeholder="Nueva Contraseña" disabled>
-            <input class="w-[250px] h-[40px] bg-white/70 outline-0 rounded-full text-center" type="password" name="confirmar_contrasena" placeholder="Confirmar Contraseña" disabled>
+            <input class="w-[250px] h-[40px] bg-white/70 outline-0 rounded-full text-center placeholder:text-[rgb(95,22,24)] placeholder:font-[500] focus:placeholder-transparent" type="text" name="email" placeholder="Email" value="<?php echo $email; ?>" disabled>
+            <input class="w-[250px] h-[40px] bg-white/70 outline-0 rounded-full text-center placeholder:text-[rgb(95,22,24)] placeholder:font-[500] focus:placeholder-transparent" type="password" name="nueva_contrasena" placeholder="Nueva Contraseña" disabled>
+            <input class="w-[250px] h-[40px] bg-white/70 outline-0 rounded-full text-center placeholder:text-[rgb(95,22,24)] placeholder:font-[500] focus:placeholder-transparent" type="password" name="confirmar_contrasena" placeholder="Confirmar Contraseña" disabled>
         </form>
     </div>
 </body>

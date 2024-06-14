@@ -1,11 +1,13 @@
 <?php
-session_start(); // Asegúrate de iniciar la sesión
+session_start();
 
 if (!isset($_SESSION['pregunta'])) {
     echo "No hay pregunta de seguridad configurada.";
     exit();
 }
 
+$errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : [];
+unset($_SESSION['errors']);
 ?>
 
 <!DOCTYPE html>
@@ -29,10 +31,24 @@ if (!isset($_SESSION['pregunta'])) {
     <h1 class="text-center mt-16 text-[2rem] text-[rgb(95,22,24)] font-[600]">Verificar Respuesta</h1>
     <div class="w-full flex flex-col gap-8 items-center mt-8">
         <form class="flex flex-col items-center gap-8 mt-6" action="actualizar_contrasena.php" method="post">
-            <p><?php echo htmlspecialchars($_SESSION['pregunta']); ?></p>
-            <input class="w-[250px] h-[40px] bg-white/70 outline-0 rounded-full text-center" type="text" name="respuesta" placeholder="Respuesta" required>
-            <input class="w-[250px] h-[40px] bg-white/70 outline-0 rounded-full text-center" type="password" name="nueva_contrasena" placeholder="Nueva Contraseña" required>
-            <input class="w-[250px] h-[40px] bg-white/70 outline-0 rounded-full text-center" type="password" name="confirmar_contrasena" placeholder="Confirmar Contraseña" required>
+            <p class="text-center text-[rgb(95,22,24)] font-[500]">
+                <?php echo htmlspecialchars($_SESSION['pregunta']); ?>
+            </p>
+            <div class="flex flex-col items-center">
+                <input class="w-[250px] h-[40px] bg-white/70 outline-0 rounded-full text-center placeholder:text-[rgb(95,22,24)] placeholder:font-[500] focus:placeholder-transparent" type="text" name="respuesta" placeholder="Respuesta" required>
+                <?php if(isset($errors['respuesta'])): ?>
+                    <div class="text-red-500 text-center mt-2"><?php echo $errors['respuesta']; ?></div>
+                <?php endif; ?>
+            </div>
+            <div class="flex flex-col items-center">
+                <input class="w-[250px] h-[40px] bg-white/70 outline-0 rounded-full text-center placeholder:text-[rgb(95,22,24)] placeholder:font-[500] focus:placeholder-transparent" type="password" name="nueva_contrasena" placeholder="Nueva Contraseña" required>
+            </div>
+            <div class="flex flex-col items-center">
+                <input class="w-[250px] h-[40px] bg-white/70 outline-0 rounded-full text-center placeholder:text-[rgb(95,22,24)] placeholder:font-[500] focus:placeholder-transparent" type="password" name="confirmar_contrasena" placeholder="Confirmar Contraseña" required>
+                <?php if(isset($errors['contrasena'])): ?>
+                    <div class="text-red-500 text-center mt-2"><?php echo $errors['contrasena']; ?></div>
+                <?php endif; ?>
+            </div>
             <button class="w-36 h-10 rounded-full bg-[rgb(95,22,24)] text-white font-[600]" type="submit">Actualizar</button>
         </form>
     </div>
