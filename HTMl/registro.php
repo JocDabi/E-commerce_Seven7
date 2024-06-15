@@ -68,7 +68,7 @@ session_start();
                 <input type="checkbox" id="privacidad" required> 
                 <label class="text-[0.8rem] text-[rgb(95,22,24)]" for="privacidad">He leído y estoy de acuerdo con las <a href="#" class="underline">políticas de privacidad.</a></label>
             </div>
-            <button class="w-36 h-10 rounded-full bg-[rgb(95,22,24)] text-white font-[600]" type="submit">Registrarse</button>
+            <button class="w-36 h-10 rounded-full bg-[rgb(95,22,24)] text-white font-[600] transition-all active:bg-transparent active:border-4 active:border-[rgb(95,22,24)] active:text-[rgb(95,22,24)]" type="submit">Registrarse</button>
         </form>
     </div>
 

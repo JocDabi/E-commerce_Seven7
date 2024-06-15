@@ -34,7 +34,7 @@ session_start();
                 <div class="text-red-500 text-center mb-4"><?php echo $_SESSION['errors']['login']; ?></div>
                 <?php unset($_SESSION['errors']['login']); // Borrar el mensaje de error después de mostrarlo ?>
             <?php endif; ?>
-            <button class="w-36 h-10 rounded-full bg-[rgb(95,22,24)] text-white font-[600]" type="submit">Acceder</button>
+            <button class="w-36 h-10 rounded-full bg-[rgb(95,22,24)] text-white font-[600] transition-all active:bg-transparent active:border-4 active:border-[rgb(95,22,24)] active:text-[rgb(95,22,24)]" type="submit">Acceder</button>
         </form>
         <p class="text-sm text-[rgb(95,22,24)] font-[500]">¿No tienes una cuenta?<a class="underline px-2" href="registro.php">Regístrate</a></p>
         <p class="text-sm text-[rgb(95,22,24)] font-[500]">¿Olvidaste tu contraseña?<a class="underline px-2" href="../restablecer_contrasena.php">Recupérala aquí</a></p>

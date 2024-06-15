@@ -49,7 +49,7 @@ unset($_SESSION['errors']);
                     <div class="text-red-500 text-center mt-2"><?php echo $errors['contrasena']; ?></div>
                 <?php endif; ?>
             </div>
-            <button class="w-36 h-10 rounded-full bg-[rgb(95,22,24)] text-white font-[600]" type="submit">Actualizar</button>
+            <button class="w-36 h-10 rounded-full bg-[rgb(95,22,24)] text-white font-[600] transition-all active:bg-transparent active:border-4 active:border-[rgb(95,22,24)] active:text-[rgb(95,22,24)]" type="submit">Actualizar</button>
         </form>
     </div>
 </body>
