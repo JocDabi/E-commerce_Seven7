@@ -12,14 +12,43 @@ if ($conn->connect_error) {
 }
 
 // Obtener los datos del formulario
-$nombre = $_POST['nombre'];
-$apellido = $_POST['apellido'];
-$direccion = $_POST['direccion'];
-$email = $_POST['email'];
-$contrasena = $_POST['contrasena'];
-$confirmar_contrasena = $_POST['confirmar_contrasena'];
+$nombre = trim($_POST['nombre']);
+$apellido = trim($_POST['apellido']);
+$direccion = trim($_POST['direccion']);
+$email = trim($_POST['email']);
+$contrasena = trim($_POST['contrasena']);
+$confirmar_contrasena = trim($_POST['confirmar_contrasena']);
 $pregunta_id = $_POST['pregunta'];
-$respuesta = $_POST['respuesta'];
+$respuesta = trim($_POST['respuesta']);
+
+// Verificar campos vacíos o solo espacios en blanco
+if (empty($nombre)) {
+    $errors['nombre'] = "El nombre no puede estar vacío.";
+}
+
+if (empty($apellido)) {
+    $errors['apellido'] = "El apellido no puede estar vacío.";
+}
+
+if (empty($direccion)) {
+    $errors['direccion'] = "La dirección no puede estar vacía.";
+}
+
+if (empty($email)) {
+    $errors['email'] = "El email no puede estar vacío.";
+}
+
+if (empty($contrasena)) {
+    $errors['contrasena'] = "La contraseña no puede estar vacía.";
+}
+
+if (empty($confirmar_contrasena)) {
+    $errors['confirmar_contrasena'] = "Debe confirmar la contraseña.";
+}
+
+if (empty($respuesta)) {
+    $errors['respuesta'] = "La respuesta no puede estar vacía.";
+}
 
 // Verificar la coincidencia de las contraseñas
 if ($contrasena !== $confirmar_contrasena) {

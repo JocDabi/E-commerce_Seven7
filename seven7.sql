@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-06-2024 a las 20:29:22
+-- Tiempo de generación: 26-06-2024 a las 07:42:36
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -24,16 +24,15 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `carrito_compras`
+-- Estructura de tabla para la tabla `carrito_de_compras`
 --
 
-CREATE TABLE `carrito_compras` (
-  `ID_CARRITO` int(11) NOT NULL,
-  `FECHA` date NOT NULL,
-  `CANTIDAD` int(11) NOT NULL,
-  `PRECIO_TOTAL` decimal(8,2) NOT NULL,
-  `Usuario_ID` int(11) NOT NULL,
-  `Productos_ID` int(11) NOT NULL
+CREATE TABLE `carrito_de_compras` (
+  `id` int(11) NOT NULL,
+  `usuario_id` int(11) DEFAULT NULL,
+  `producto_id` int(11) DEFAULT NULL,
+  `cantidad` int(11) DEFAULT NULL,
+  `fecha` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -91,16 +90,21 @@ INSERT INTO `preguntas_seguridad` (`id`, `pregunta`) VALUES
 --
 
 CREATE TABLE `productos` (
-  `ID_PRODUCTO` int(11) NOT NULL,
-  `NOMBRE` varchar(45) NOT NULL,
-  `DESCRIPCION` varchar(45) DEFAULT NULL,
-  `STOCK` decimal(8,2) NOT NULL,
-  `PRECIO` decimal(8,2) NOT NULL,
-  `CATEGORIA` varchar(45) NOT NULL,
-  `DESCUENTO` decimal(5,2) DEFAULT NULL,
-  `Comprobante_ID` int(11) NOT NULL,
-  `Carrito_ID` int(11) NOT NULL
+  `id` int(11) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `descripcion` text DEFAULT NULL,
+  `precio` decimal(10,2) DEFAULT NULL,
+  `imagen` varchar(255) DEFAULT NULL,
+  `cantidad` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `imagen`, `cantidad`) VALUES
+(1, 'bluza', 'rosada', 50.00, 'blazer.png', 5),
+(3, 'short', 'es un short', 100000.00, 'short.png', 5);
 
 -- --------------------------------------------------------
 
@@ -120,16 +124,23 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`ID_USUARIO`, `NOMBRE`, `APELLIDO`, `EMAIL`, `DIRECCION`, `CONTRASENA`, `pregunta_id`, `respuesta`) VALUES
+(14, 'Jose', 'cedeno', 'josedcv290604@gmail.com', 'Barrio los olivos avenida 67', '$2y$10$Z9UGUc6xtUUtK3cv2y45..yc3RjUJbecRS26D32Ru7fmSAKfiupDm', 1, '12');
+
+--
 -- Índices para tablas volcadas
 --
 
 --
--- Indices de la tabla `carrito_compras`
+-- Indices de la tabla `carrito_de_compras`
 --
-ALTER TABLE `carrito_compras`
-  ADD PRIMARY KEY (`ID_CARRITO`),
-  ADD KEY `Usuario_ID` (`Usuario_ID`),
-  ADD KEY `Productos_ID` (`Productos_ID`);
+ALTER TABLE `carrito_de_compras`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `producto_id` (`producto_id`),
+  ADD KEY `usuario_id` (`usuario_id`);
 
 --
 -- Indices de la tabla `comprobante`
@@ -157,9 +168,7 @@ ALTER TABLE `preguntas_seguridad`
 -- Indices de la tabla `productos`
 --
 ALTER TABLE `productos`
-  ADD PRIMARY KEY (`ID_PRODUCTO`),
-  ADD KEY `Comprobante_ID` (`Comprobante_ID`),
-  ADD KEY `Carrito_ID` (`Carrito_ID`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `usuario`
@@ -173,10 +182,10 @@ ALTER TABLE `usuario`
 --
 
 --
--- AUTO_INCREMENT de la tabla `carrito_compras`
+-- AUTO_INCREMENT de la tabla `carrito_de_compras`
 --
-ALTER TABLE `carrito_compras`
-  MODIFY `ID_CARRITO` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `carrito_de_compras`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `comprobante`
@@ -200,31 +209,30 @@ ALTER TABLE `preguntas_seguridad`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `ID_PRODUCTO` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `ID_USUARIO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `ID_USUARIO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Restricciones para tablas volcadas
 --
 
 --
--- Filtros para la tabla `carrito_compras`
+-- Filtros para la tabla `carrito_de_compras`
 --
-ALTER TABLE `carrito_compras`
-  ADD CONSTRAINT `carrito_compras_ibfk_1` FOREIGN KEY (`Usuario_ID`) REFERENCES `usuario` (`ID_USUARIO`),
-  ADD CONSTRAINT `carrito_compras_ibfk_2` FOREIGN KEY (`Productos_ID`) REFERENCES `productos` (`ID_PRODUCTO`);
+ALTER TABLE `carrito_de_compras`
+  ADD CONSTRAINT `carrito_de_compras_ibfk_1` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`id`),
+  ADD CONSTRAINT `carrito_de_compras_ibfk_2` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`ID_USUARIO`);
 
 --
 -- Filtros para la tabla `comprobante`
 --
 ALTER TABLE `comprobante`
-  ADD CONSTRAINT `comprobante_ibfk_1` FOREIGN KEY (`Usuario_ID`) REFERENCES `usuario` (`ID_USUARIO`),
-  ADD CONSTRAINT `comprobante_ibfk_2` FOREIGN KEY (`Productos_ID`) REFERENCES `productos` (`ID_PRODUCTO`);
+  ADD CONSTRAINT `comprobante_ibfk_1` FOREIGN KEY (`Usuario_ID`) REFERENCES `usuario` (`ID_USUARIO`);
 
 --
 -- Filtros para la tabla `historial_compras`
@@ -232,13 +240,6 @@ ALTER TABLE `comprobante`
 ALTER TABLE `historial_compras`
   ADD CONSTRAINT `historial_compras_ibfk_1` FOREIGN KEY (`Usuario_ID`) REFERENCES `usuario` (`ID_USUARIO`),
   ADD CONSTRAINT `historial_compras_ibfk_2` FOREIGN KEY (`Comprobante_ID`) REFERENCES `comprobante` (`ID_COMPROBANTE`);
-
---
--- Filtros para la tabla `productos`
---
-ALTER TABLE `productos`
-  ADD CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`Comprobante_ID`) REFERENCES `comprobante` (`ID_COMPROBANTE`),
-  ADD CONSTRAINT `productos_ibfk_2` FOREIGN KEY (`Carrito_ID`) REFERENCES `carrito_compras` (`ID_CARRITO`);
 
 --
 -- Filtros para la tabla `usuario`
