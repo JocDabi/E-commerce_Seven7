@@ -5,16 +5,55 @@ include '../connect.php'; // Incluye el archivo de conexión a la base de datos
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['compra_id'])) {
     $compra_id = $_POST['compra_id'];
 
-    // Actualiza el estado de la compra a 'realizada' en la tabla 'comprobante'
-    $sql = "UPDATE comprobante SET estado = 'realizada' WHERE ID_COMPROBANTE = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $compra_id);
-    $stmt->execute();
-    $stmt->close();
+    $conn->begin_transaction();
 
-    // Redirige de vuelta a la página desde donde se hizo la solicitud
-    header('Location: admin.html'); // Cambia esto por la página adecuada
-    exit;
+    try {
+        // Actualiza el estado de la compra a 'realizada' en la tabla 'comprobante'
+        $sql = "UPDATE comprobante SET estado = 'realizada' WHERE ID_COMPROBANTE = ?";
+        $stmt = $conn->prepare($sql);
+        if (!$stmt) {
+            throw new Exception("Error preparando statement: " . $conn->error);
+        }
+        $stmt->bind_param("i", $compra_id);
+        $stmt->execute();
+        $stmt->close();
+
+        // Obtener los productos del comprobante
+        $sql_productos = "SELECT Producto_ID, Cantidad FROM comprobante_producto WHERE Comprobante_ID = ?";
+        $stmt_productos = $conn->prepare($sql_productos);
+        if (!$stmt_productos) {
+            throw new Exception("Error preparando statement: " . $conn->error);
+        }
+        $stmt_productos->bind_param("i", $compra_id);
+        $stmt_productos->execute();
+        $result_productos = $stmt_productos->get_result();
+
+        // Actualizar la cantidad en la tabla productos
+        $sql_update_producto = "UPDATE productos SET cantidad = cantidad - ? WHERE id = ?";
+        $stmt_update_producto = $conn->prepare($sql_update_producto);
+        if (!$stmt_update_producto) {
+            throw new Exception("Error preparando statement: " . $conn->error);
+        }
+
+        while ($producto = $result_productos->fetch_assoc()) {
+            $stmt_update_producto->bind_param("ii", $producto['Cantidad'], $producto['Producto_ID']);
+            $stmt_update_producto->execute();
+        }
+
+        $stmt_productos->close();
+        $stmt_update_producto->close();
+
+        $conn->commit();
+
+        // Redirige de vuelta a la página desde donde se hizo la solicitud
+        header('Location: admin.html'); // Cambia esto por la página adecuada
+        exit();
+    } catch (Exception $e) {
+        $conn->rollback();
+        echo "Error: " . $e->getMessage();
+    } finally {
+        $conn->close();
+    }
 }
 
 // Consulta las compras pendientes para confirmar desde la tabla 'comprobante'

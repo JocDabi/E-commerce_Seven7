@@ -98,10 +98,14 @@ if (!isset($_SESSION['user_id'])) {
     <div class="w-full h-auto flex flex-col items-center my-8">
         <form method="POST" action="./finalizar_compra.php" id="finalizar-compra-form">
             <input type="hidden" name="carrito" id="carrito-input">
-            <button type="submit" class="w-[170px] h-[50px] bg-white rounded-full text-[rgb(95,22,24)] font-bold">Finalizar compra</button>
+            <button type="submit" class="w-[170px] h-[50px] bg-white rounded-full text-[rgb(95,22,24)] font-bold" onclick="abrirWhatsApp()">Finalizar compra</button>
         </form>
     </div>
     <script>
+        function abrirWhatsApp() {
+            window.open("https://wa.me/+584126933166", "_blank");
+        }
+
         document.addEventListener("DOMContentLoaded", function() {
             cargarCarrito();
 
