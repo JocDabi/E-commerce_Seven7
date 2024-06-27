@@ -85,6 +85,13 @@
     <section class="flex flex-col items-center gap-8 mt-10" id="carrito">
         <!-- Aquí se cargarán los productos del carrito -->
     </section>
+
+    <p id="total" class="text-[rgb(95,22,24)] text-xl font-bold mt-8 px-2">Total: $0</p>
+    <div class="w-full h-auto flex flex-col items-center my-8">
+        <a href="https://wa.me/+584126933166">
+            <button class="w-[170px] h-[50px] bg-white rounded-full text-[rgb(95,22,24)] font-bold">Finalizar compra</button>
+        </a>
+    </div>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             cargarCarrito();
@@ -108,6 +115,7 @@
 
                 if (carrito.length === 0) {
                     carritoElement.innerHTML = '<p class="text-center text-[rgb(95,22,24)] text-[1.3rem] font-[600]">El carrito está vacío.</p>';
+                    actualizarTotal();
                     return;
                 }
 
@@ -122,7 +130,7 @@
                         <div class="flex flex-col gap-2 pt-6 justify-center">
                             <p class="text-[rgb(95,22,24)] font-[500]">${item.nombre}</p>
                             <span class="text-xl text-[rgb(95,22,24)] font-[700]">$${item.precio}</span>
-                            <div class="flex pt-6 justify-end mr-4">
+                            <div class="flex pt-6 justify-end">
                                 <button class="w-[30px] bg-[rgb(95,22,24)]/50 text-xl text-white" onclick='actualizarCantidad(${JSON.stringify(item.id)}, -1)'> - </button>
                                 <div class="w-[40px] bg-white/15 text-center">${item.cantidad}</div>
                                 <button class="w-[30px] bg-[rgb(95,22,24)]/50 text-xl text-white" onclick='actualizarCantidad(${JSON.stringify(item.id)}, 1)'> + </button>
@@ -131,6 +139,14 @@
                     `;
                     carritoElement.appendChild(div);
                 });
+
+                actualizarTotal();
+            }
+
+            function actualizarTotal() {
+                let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+                let total = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+                document.getElementById('total').textContent = `Total: $${total.toFixed(2)}`;
             }
 
             window.eliminarDelCarrito = function(productoID) {
@@ -174,4 +190,3 @@
     </script>
 </body>
 </html>
-
