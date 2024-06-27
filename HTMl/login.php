@@ -18,10 +18,10 @@ session_start();
 <style>
     * {
         font-family: "Montserrat", sans-serif;
-    }
+    } 
 </style>
 
-<body class="w-[100%] h-screen bg-gradient-to-b from-pink-300 via-pink-200 to-pink-100 overflow-x-hidden">
+<body class="w-[100%]  bg-gradient-to-b from-pink-300 via-pink-200 to-pink-100 overflow-x-hidden">
     
     <h1 class="text-center mt-16 text-[2rem] text-[rgb(95,22,24)] font-[600]">Iniciar sesión</h1>
 
@@ -38,6 +38,9 @@ session_start();
         </form>
         <p class="text-sm text-[rgb(95,22,24)] font-[500]">¿No tienes una cuenta?<a class="underline px-2" href="registro.php">Regístrate</a></p>
         <p class="text-sm text-[rgb(95,22,24)] font-[500]">¿Olvidaste tu contraseña?<a class="underline px-2" href="../restablecer_contrasena.php">Recupérala aquí</a></p>
+        
+        <!-- Enlace para iniciar sesión como administrador -->
+        <p class="text-sm text-[rgb(95,22,24)] font-[500]">¿Iniciar sesión como administrador?<a class="underline px-2" href="admin_login.php">Haz clic aquí</a></p>
     </div>
 
     <?php
@@ -48,4 +51,3 @@ session_start();
     ?>
 </body>
 </html>
-
