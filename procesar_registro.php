@@ -98,8 +98,11 @@ if (!empty($errors)) {
 // Hashear la contraseña
 $hashed_contrasena = password_hash($contrasena, PASSWORD_BCRYPT);
 
+// Obtener la fecha actual
+$fecha_registro = date("Y-m-d H:i:s");
+
 // Crear la consulta SQL para insertar los datos en la tabla de usuarios
-$sql = "INSERT INTO usuario (NOMBRE, APELLIDO, DIRECCION, EMAIL, CONTRASENA, PREGUNTA_ID, RESPUESTA) VALUES (?, ?, ?, ?, ?, ?, ?)";
+$sql = "INSERT INTO usuario (NOMBRE, APELLIDO, DIRECCION, EMAIL, CONTRASENA, PREGUNTA_ID, RESPUESTA, FECHA_REGISTRO) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
 
 if ($stmt === false) {
@@ -107,7 +110,7 @@ if ($stmt === false) {
 }
 
 // Bind parameters
-$stmt->bind_param("sssssis", $nombre, $apellido, $direccion, $email, $hashed_contrasena, $pregunta_id, $respuesta);
+$stmt->bind_param("ssssssss", $nombre, $apellido, $direccion, $email, $hashed_contrasena, $pregunta_id, $respuesta, $fecha_registro);
 
 // Ejecutar la consulta
 if ($stmt->execute()) {
