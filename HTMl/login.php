@@ -21,7 +21,7 @@ session_start();
     } 
 </style>
 
-<body class="w-[100%]  bg-gradient-to-b from-pink-300 via-pink-200 to-pink-100 overflow-x-hidden">
+<body class="w-[100%] h-screen bg-gradient-to-b from-pink-300 via-pink-200 to-pink-100 overflow-x-hidden">
     
     <h1 class="text-center mt-16 text-[2rem] text-[rgb(95,22,24)] font-[600]">Iniciar sesión</h1>
 

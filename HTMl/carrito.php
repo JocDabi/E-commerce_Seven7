@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,9 +96,10 @@
 
     <p id="total" class="text-[rgb(95,22,24)] text-xl font-bold mt-8 px-2">Total: $0</p>
     <div class="w-full h-auto flex flex-col items-center my-8">
-        <a href="https://wa.me/+584126933166">
-            <button class="w-[170px] h-[50px] bg-white rounded-full text-[rgb(95,22,24)] font-bold">Finalizar compra</button>
-        </a>
+        <form method="POST" action="./finalizar_compra.php" id="finalizar-compra-form">
+            <input type="hidden" name="carrito" id="carrito-input">
+            <button type="submit" class="w-[170px] h-[50px] bg-white rounded-full text-[rgb(95,22,24)] font-bold">Finalizar compra</button>
+        </form>
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -185,6 +194,12 @@
             // Agregar listener al botón de cerrar sesión
             document.getElementById('logout-button').addEventListener('click', function() {
                 localStorage.removeItem('carrito');
+            });
+
+            // Añadir carrito al formulario antes de enviar
+            document.getElementById('finalizar-compra-form').addEventListener('submit', function() {
+                let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+                document.getElementById('carrito-input').value = JSON.stringify(carrito);
             });
         });
     </script>

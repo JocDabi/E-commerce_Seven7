@@ -67,7 +67,7 @@
 </style>
 <body class="w-[100%] bg-gradient-to-b from-pink-300 via-pink-200 to-pink-100 overflow-x-hidden">
     <nav>
-        <a class="pt-6 pl-7" href="index.html">
+        <a class="pt-6 pl-7" href="admin.html">
             <img class="w-[68px] h-[68px]" src="../images/Recurso 1.png" alt="">
         </a>
         <div>
@@ -80,7 +80,7 @@
 
     <div class="nav-placeholder"></div>
 
-    <h1 class="text-center my-10 text-[2rem] text-[rgb(95,22,24)] font-[600]">Administrador de Productos</h1>
+    <h1 class="text-center mt-12 text-[2rem] text-[rgb(95,22,24)] font-[600]">Stock</h1>
 
     <section class="flex flex-col items-center gap-8 mt-10" id="admin-catalogo">
         <!-- Aquí se cargarán los productos del catálogo -->
@@ -94,7 +94,7 @@
             <input type="text" id="imagen" name="imagen" placeholder="Nombre del Archivo de Imagen" class="p-2 border border-gray-300 rounded" required>
             <input type="number" id="precio" name="precio" placeholder="Precio" class="p-2 border border-gray-300 rounded" required>
             <input type="number" id="cantidad" name="cantidad" placeholder="Cantidad" class="p-2 border border-gray-300 rounded" required>
-            <button type="submit" class="p-2 bg-[rgb(95,22,24)] text-white rounded">Agregar Producto</button>
+            <button type="submit" class="p-2 mb-6 bg-[rgb(95,22,24)] text-white rounded">Agregar Producto</button>
         </form>
     </section>
 
@@ -116,10 +116,10 @@
                     } else {
                         productos.forEach(item => {
                             const div = document.createElement('div');
-                            div.classList.add('w-[100%]', 'h-[200px]', 'bg-black/15', 'flex');
+                            div.classList.add('w-[100%]', 'h-[240px]', 'bg-black/15', 'flex');
                             div.innerHTML = `
                                 <div class="flex gap-2 items-center">
-                                    <img class="w-[12%] h-[10%] ml-4" src="../images/x.png" alt="" onclick="eliminarProducto(${item.id})">
+                                    <img class="w-[12%] h-[10%] ml-4 cursor-pointer" src="../images/x.png" alt="" onclick="eliminarProducto(${item.id})">
                                     <img class="w-[70%] h-[80%] pt-6" src="../images/${item.imagen}" alt="${item.nombre}">
                                 </div>
                                 <div class="flex flex-col gap-2 pt-6 justify-center">
@@ -127,8 +127,8 @@
                                     <span class="text-xl text-[rgb(95,22,24)] font-[700]">$${item.precio}</span>
                                     <p class="text-[rgb(95,22,24)] font-[400]">${item.descripcion}</p>
                                     <p class="text-[rgb(95,22,24)] font-[400]">Cantidad: ${item.cantidad}</p>
-                                    <input type="number" id="cantidad-${item.id}" class="p-2 border border-gray-300 rounded" placeholder="Nueva Cantidad">
-                                    <button onclick="editarCantidad(${item.id})" class="p-2 bg-[rgb(95,22,24)] text-white rounded">Editar Cantidad</button>
+                                    <input type="number" id="cantidad-${item.id}" class="w-[80%] h-[30px] p-2 border border-gray-300 rounded" placeholder="Nueva Cantidad">
+                                    <button onclick="editarCantidad(${item.id})" class="w-[80%] h-[28px] bg-[rgb(95,22,24)] text-white rounded">Editar Cantidad</button>
                                 </div>
                             `;
                             catalogo.appendChild(div);
