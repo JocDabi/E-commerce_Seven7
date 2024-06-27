@@ -76,7 +76,7 @@
             <div class="menu">
                 <a href="catalogo.php">Catálogo</a>
                 <a href="carrito.php">Carrito de compras</a>
-                <a href="historial.html">Historial de compras</a>
+                <a href="historial.php">Historial de compras</a>
                 <a href="../logout.php" class="login-button">Cerrar sesión</a>
             </div>
         </div>

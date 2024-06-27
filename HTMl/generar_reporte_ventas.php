@@ -38,11 +38,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['fecha_inicio']) && iss
                 box-sizing: border-box;
             }
 
-            body {
-                background: linear-gradient(to bottom, #f77062, #fe5196);
-                overflow-x: hidden;
-            }
-
             .container {
                 max-width: 960px;
                 margin: 0 auto;
@@ -97,9 +92,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['fecha_inicio']) && iss
             }
         </style>
     </head>
-    <body>
+    <body class="w-[100%] h-screen bg-gradient-to-b from-pink-400 via-pink-200 to-pink-100 overflow-x-hidden">
+        <nav class="flex justify-between">
+            <a class="pt-10 pl-7" href="admin.html">
+                <img class="w-[68px] h-[68px]" src="../images/Recurso 1.png" alt="">
+            </a>
+        </nav>
         <div class="container mt-5">
-            <h2 class="text-center mb-3">Reporte de Ventas</h2>
+            <h2 class="text-center mb-3 text-2xl font-bold">Reporte de Ventas</h2>
             <?php if ($result->num_rows > 0): ?>
                 <table class="table">
                     <thead>
@@ -136,7 +136,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['fecha_inicio']) && iss
     $conn->close();
 } else {
     // Redirige a la página del formulario si no se enviaron las fechas correctamente
-    header("Location: reporte_ventas.php");
+    header("Location: generar_reporte_ventas.php");
     exit();
 }
 ?>

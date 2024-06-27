@@ -78,7 +78,7 @@ $result = $conn->query($sql);
         font-family: "Montserrat", sans-serif;
     }
 </style>
-<body class="w-[100%] h-screen bg-gradient-to-b from-pink-300 via-pink-200 to-pink-100 overflow-x-hidden">
+<body class="w-[100%] h-auto bg-gradient-to-b from-pink-300 via-pink-200 to-pink-100 overflow-x-hidden">
     <nav class="flex justify-between">
         <a class="pt-10 pl-7" href="admin.html">
             <img class="w-[68px] h-[68px]" src="../images/Recurso 1.png" alt="">
