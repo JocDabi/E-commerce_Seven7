@@ -23,85 +23,92 @@ session_start();
     }
 </style>
 
-<body class="w-[100%] bg-gradient-to-b from-pink-300 via-pink-200 to-pink-100 overflow-x-hidden">
-    <h1 class="text-center mt-32 text-[2rem] text-[rgb(95,22,24)] font-[600]">Registrarse</h1>
+<body class="w-full bg-gradient-to-b from-pink-300 via-pink-200 to-pink-100 overflow-x-hidden">
+    <h1 class="text-center mt-8 text-2xl text-red-900 font-semibold">Registrarse</h1>
     
-    <div class="w-full flex flex-col gap-8 items-center mt-4">
-        <form class="flex flex-col items-center gap-7 mt-6" action="../procesar_registro.php" method="post">
-            <div class="relative flex">
-                <label class="text-[rgb(95,22,24)] text-32 font-bold pt-2 mr-4" for="nombre">Nombre:</label>
-                <input class="w-[230px] h-[40px] bg-white/70 outline-0 rounded-full text-center placeholder:text-[rgb(95,22,24)] placeholder:font-[500] focus:placeholder-transparent" type="text" name="nombre" maxlength="20" required autocomplete="off">
-                <p class="text-gray-600 text-xs absolute left-24 top-full mt-1 hidden">Máximo 20 caracteres</p>
-                <?php if(isset($_SESSION['errors']['nombre'])): ?>
-                    <div class="text-red-500 text-sm text-center mb-4">
-                        <?php echo $_SESSION['errors']['nombre']; ?>
-                    </div>
-                <?php endif; ?>
-            </div>
+    <div class="w-full flex flex-col items-center mt-4">
+        <form class="flex flex-col items-center gap-7 mt-6 w-full max-w-xl" action="../procesar_registro.php" method="post">
             
-            <div class="relative flex">
-            <label class="text-[rgb(95,22,24)] text-32 font-bold pt-2 mr-4" for="nombre">Apellido:</label>
-                <input class="w-[230px] h-[40px] bg-white/70 outline-0 rounded-full text-center placeholder:text-[rgb(95,22,24)] placeholder:font-[500] focus:placeholder-transparent" type="text" name="apellido" maxlength="20" required autocomplete="off">
-                <p class="text-gray-600 text-xs absolute left-0 top-full mt-1 hidden">Máximo 20 caracteres</p>
-                <?php if(isset($_SESSION['errors']['apellido'])): ?>
-                    <div class="text-red-500 text-sm text-center mb-4">
-                        <?php echo $_SESSION['errors']['apellido']; ?>
-                    </div>
-                <?php endif; ?>
+            <div class="relative flex items-center w-full">
+                <label class="text-red-900 text-lg font-bold w-1/3 text-right pr-4" for="nombre">Nombre:</label>
+                <input class="w-2/4 h-10 bg-white/70 outline-none rounded-full text-center placeholder:text-red-900 placeholder:font-medium focus:placeholder-transparent" type="text" name="nombre" maxlength="20" required autocomplete="off">
+                <p class="text-gray-600 text-xs absolute left-32 top-full mt-1 hidden">Máximo 20 caracteres</p>
             </div>
-
-            <div class="relative flex">
-            <label class="text-[rgb(95,22,24)] text-32 font-bold pt-2 mr-4" for="nombre">Direccion:</label>
-                <input class="w-[250px] h-[40px] bg-white/70 outline-0 rounded-full text-center placeholder:text-[rgb(95,22,24)] placeholder:font-[500] focus:placeholder-transparent" type="text" name="direccion" maxlength="20" required autocomplete="off">
-                <p class="text-gray-600 text-xs absolute left-0 top-full mt-1 hidden">Máximo 20 caracteres</p>
-            </div>
-
-            <div class="relative flex">
-            <label class="text-[rgb(95,22,24)] text-32 font-bold pt-2 mr-4" for="nombre">Email:</label>
-                <input class="w-[250px] h-[40px] bg-white/70 outline-0 rounded-full text-center placeholder:text-[rgb(95,22,24)] placeholder:font-[500] focus:placeholder-transparent" type="email" name="email" required autocomplete="off">
-                <?php if(isset($_SESSION['errors']['email'])): ?>
-                    <div class="text-red-500 text-sm text-center mb-4">
-                        <?php echo $_SESSION['errors']['email']; ?>
-                    </div>
-                <?php endif; ?>
-            </div>
+            <?php if(isset($_SESSION['errors']['nombre'])): ?>
+                <div class="text-red-500 text-sm text-center">
+                    <?php echo $_SESSION['errors']['nombre']; ?>
+                </div>
+            <?php endif; ?>
             
-            <div class="relative flex">
-            <label class="text-[rgb(95,22,24)] text-32 font-bold pt-2 mr-4" for="nombre">Contraseña:</label>
-                <input class="w-[230px] h-[40px] bg-white/70 outline-0 rounded-full text-center placeholder:text-[rgb(95,22,24)] placeholder:font-[500] focus:placeholder-transparent" type="password" name="contrasena" minlength="8" required autocomplete="off">
-                <p class="text-gray-600 text-xs absolute left-0 top-full mt-1 hidden">Mínimo 8 caracteres</p>
+            <div class="relative flex items-center w-full">
+                <label class="text-red-900 text-lg font-bold w-1/3 text-right pr-4" for="apellido">Apellido:</label>
+                <input class="w-2/4 h-10 bg-white/70 outline-none rounded-full text-center placeholder:text-red-900 placeholder:font-medium focus:placeholder-transparent" type="text" name="apellido" maxlength="20" required autocomplete="off">
+                <p class="text-gray-600 text-xs absolute left-32 top-full mt-1 hidden">Máximo 20 caracteres</p>
+            </div>
+            <?php if(isset($_SESSION['errors']['apellido'])): ?>
+                <div class="text-red-500 text-sm text-center mt-2">
+                    <?php echo $_SESSION['errors']['apellido']; ?>
+                </div>
+            <?php endif; ?>
+
+            <div class="relative flex items-center w-full">
+                <label class="text-red-900 text-lg font-bold w-1/3 text-right pr-4" for="direccion">Dirección:</label>
+                <input class="w-2/4 h-10 bg-white/70 outline-none rounded-full text-center placeholder:text-red-900 placeholder:font-medium focus:placeholder-transparent" type="text" name="direccion" maxlength="20" required autocomplete="off">
+                <p class="text-gray-600 text-xs absolute left-32 top-full mt-1 hidden">Máximo 20 caracteres</p>
             </div>
 
-            <div class="relative flex">
-            <label class="text-[rgb(95,22,24)] text-32 font-bold pt-2 mr-4" for="nombre">Confirmar contraseña:</label>
-                <input class="w-[230px] h-[40px] bg-white/70 outline-0 rounded-full text-center placeholder:text-[rgb(95,22,24)] placeholder:font-[500] focus:placeholder-transparent" type="password" name="confirmar_contrasena" minlength="8" required autocomplete="off">
-                <?php if(isset($_SESSION['errors']['contrasena'])): ?>
-                    <div class="text-red-500 text-sm text-center mb-4">
-                        <?php echo $_SESSION['errors']['contrasena']; ?>
-                    </div>
-                <?php endif; ?>
+            <div class="relative flex items-center w-full">
+                <label class="text-red-900 text-lg font-bold w-1/3 text-right pr-4" for="email">Email:</label>
+                <input class="w-2/4 h-10 bg-white/70 outline-none rounded-full text-center placeholder:text-red-900 placeholder:font-medium focus:placeholder-transparent" type="email" name="email" required autocomplete="off">
             </div>
+            <?php if(isset($_SESSION['errors']['email'])): ?>
+                <div class="text-red-500 text-sm text-center mt-2">
+                    <?php echo $_SESSION['errors']['email']; ?>
+                </div>
+            <?php endif; ?>
+            
+            <div class="relative flex items-center w-full">
+                <label class="text-red-900 text-lg font-bold w-1/3 text-right pr-4" for="contrasena">Contraseña:</label>
+                <input class="w-2/4 h-10 bg-white/70 outline-none rounded-full text-center placeholder:text-red-900 placeholder:font-medium focus:placeholder-transparent" type="password" name="contrasena" minlength="8" required autocomplete="off">
+                <p class="text-gray-600 text-xs absolute left-32 top-full mt-1 hidden">Mínimo 8 caracteres</p>
+            </div>
+
+            <div class="relative flex items-center w-full">
+                <label class="text-red-900 text-lg font-bold w-1/3 text-right pr-4" for="confirmar_contrasena">Confirmar contraseña:</label>
+                <input class="w-2/4 h-10 bg-white/70 outline-none rounded-full text-center placeholder:text-red-900 placeholder:font-medium focus:placeholder-transparent" type="password" name="confirmar_contrasena" minlength="8" required autocomplete="off">
+            </div>
+            <?php if(isset($_SESSION['errors']['contrasena'])): ?>
+                <div class="text-red-500 text-sm text-center mt-2">
+                    <?php echo $_SESSION['errors']['contrasena']; ?>
+                </div>
+            <?php endif; ?>
 
             <!-- Pregunta de Seguridad -->
-            <select class="w-[250px] h-[40px] bg-white/70 outline-0 rounded-full text-center" name="pregunta" required>
-                <option value="" disabled selected>Seleccione una pregunta de seguridad</option>
-                <option value="1">¿Cuál es el nombre de tu primera mascota?</option>
-                <option value="2">¿Cuál es el nombre de la ciudad donde naciste?</option>
-                <option value="3">¿Cuál es tu comida favorita?</option>
-            </select>
-            <div class="relative flex">
-            <label class="text-[rgb(95,22,24)] text-32 font-bold pt-2 mr-4" for="nombre">Respuesta:</label>
-                <input class="w-[250px] h-[40px] bg-white/70 outline-0 rounded-full text-center" type="text" name="respuesta" maxlength="30" required autocomplete="off">
-                <p class="text-gray-600 text-xs absolute left-0 top-full mt-1 hidden">Máximo 30 caracteres</p>
+            <div class="flex items-center w-full">
+                <label for="pregunta" class="text-red-900 text-lg font-bold w-1/3 text-right pr-4">Pregunta de seguridad:</label>
+                <select class="w-2/4 h-10 bg-white/70 outline-none rounded-full text-center" name="pregunta" required>
+                    <option value="" disabled selected>Seleccione una pregunta de seguridad</option>
+                    <option value="1">¿Cuál es el nombre de tu primera mascota?</option>
+                    <option value="2">¿Cuál es el nombre de la ciudad donde naciste?</option>
+                    <option value="3">¿Cuál es tu comida favorita?</option>
+                </select>
+            </div>
+            
+            <div class="relative flex items-center w-full">
+                <label class="text-red-900 text-lg font-bold w-1/3 text-right pr-4" for="respuesta">Respuesta:</label>
+                <input class="w-2/4 h-10 bg-white/70 outline-none rounded-full text-center placeholder:text-red-900 placeholder:font-medium focus:placeholder-transparent" type="text" name="respuesta" maxlength="30" required autocomplete="off">
+                <p class="text-gray-600 text-xs absolute left-32 top-full mt-1 hidden">Máximo 30 caracteres</p>
             </div>
 
-            <div class="flex gap-2 ml-10">
-                <input type="checkbox" id="privacidad" required> 
-                <label class="text-[0.8rem] text-[rgb(95,22,24)]" for="privacidad">He leído y estoy de acuerdo con las <a href="#" class="underline">políticas de privacidad.</a></label>
+            <div class="flex items-center w-full pl-20 mt-2">
+                <input class="mr-2" type="checkbox" id="privacidad" required> 
+                <label class="text-sm text-red-900" for="privacidad">He leído y estoy de acuerdo con las <a href="#" class="underline">políticas de privacidad.</a></label>
             </div>
-            <button class="w-36 h-10 rounded-full bg-[rgb(95,22,24)] text-white font-[600] transition-all active:bg-transparent active:border-4 active:border-[rgb(95,22,24)] active:text-[rgb(95,22,24)]" type="submit">Registrarse</button>
+
+            <button class="w-36 h-10 rounded-full bg-red-900 text-white font-semibold transition-all active:bg-transparent active:border-4 active:border-red-900 active:text-red-900" type="submit">Registrarse</button>
         </form>
-        <p class="text-center text-[rgb(95,22,24)] font-[500] mt-4">
+
+        <p class="text-center text-red-900 font-medium mt-4">
             ¿Tienes una cuenta? <a href="login.php" class="underline">Iniciar sesión</a>
         </p>
     </div>
