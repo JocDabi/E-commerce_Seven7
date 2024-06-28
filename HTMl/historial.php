@@ -91,7 +91,7 @@ $conn->close();
     }
 </style>
 
-<body class="w-[100%] bg-gradient-to-b from-pink-300 via-pink-200 to-pink-100 overflow-x-hidden">
+<body class="w-[100%] h-auto bg-gradient-to-b from-pink-300 via-pink-200 to-pink-100 overflow-x-hidden">
     <nav>
         <a class="pt-6 pl-7" href="index.html">
             <img class="w-[68px] h-[68px]" src="../images/Recurso 1.png" alt="">
@@ -114,7 +114,7 @@ $conn->close();
             <div class="bg-black/15 h-[120px] w-[80%] mb-4 p-4 rounded-lg">
                 <h3 class="text-[rgb(95,22,24)] text-xl font-[600]">Compra <?php echo isset($compra['estado']) && $compra['estado'] === 'pendiente' ? 'pendiente' : 'realizada'; ?></h3>
                 <p class="text-[rgb(95,22,24)] text-sm font-[500]">Fecha: <?php echo $compra['FECHA']; ?></p>
-                <a href="ver_detalles.php?comprobante_id=<?php echo $compra['Comprobante_ID']; ?>" class="w-40 bg-white/90 rounded-full ml-[200px] text-[rgb(95,22,24)] font-bold text-center p-2">Ver detalles</a>
+                <a href="ver_detalles.php?comprobante_id=<?php echo $compra['Comprobante_ID']; ?>" class="w-40 bg-white/90 rounded-full ml-[150px] text-[rgb(95,22,24)] font-bold text-center p-2">Ver detalles</a>
             </div>
         <?php endforeach; ?>
     </div>

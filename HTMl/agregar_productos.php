@@ -14,6 +14,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validar que los campos obligatorios no estén vacíos
     if (empty($nombre) || empty($descripcion) || empty($imagen)) {
         $response['message'] = 'Por favor completa todos los campos obligatorios';
+    } elseif ($precio < 0) {
+        $response['message'] = 'El precio no puede ser negativo';
+    } elseif ($cantidad < 0) {
+        $response['message'] = 'La cantidad no puede ser negativa';
     } else {
         // Preparar la consulta SQL para insertar el producto
         $stmt = $conn->prepare("INSERT INTO productos (nombre, descripcion, precio, imagen, cantidad) VALUES (?, ?, ?, ?, ?)");

@@ -16,16 +16,71 @@
             font-family: "Montserrat", sans-serif;
         }
 
+        nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between; 
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        backdrop-filter: blur(8px);
+    }
+
+    .nav-placeholder {
+        height: 68px; 
+    }
+
+    .menu {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 100%;
+        background: white;
+        border: 1px solid #ccc;
+        width: 200px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .menu a {
+        display: block;
+        padding: 10px;
+        text-decoration: none;
+        color: #333;
+    }
+
+    .menu a:hover {
+        background-color: #f0f0f0;
+    }
+
+    .menu .login-button {
+        text-align: center;
+        background-color: #ee0101;
+        color: white;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .menu .login-button:hover {
+        background-color: #b30000;
+    }
     </style>
 
-    <body class="w-[100%] h-screen bg-gradient-to-b from-pink-300 via-pink-200 to-pink-100 overflow-x-hidden">
-        <nav class="flex justify-between">
-            <a class="pt-10 pl-7" href="admin.html">
-                <img class="w-[68px] h-[68px]" src="../images/Recurso 1.png" alt=""">
+    <body class="w-[100%] h-screen bg-gradient-to-b from-pink-300 via-pink-200 to-pink-100 overflow-x-hidden overflow-y-hidden">
+        <nav>
+            <a class="pt-6 pl-7" href="admin.html">
+                <img class="w-[68px] h-[68px]" src="../images/Recurso 1.png" alt="">
             </a>
+            <div>
+                <img class="pt-7 pr-6 w-[70px] cursor-pointer menu-toggle" src="../images/menu.png" alt="">
+                <div class="menu">
+                    <a href="../logout.php" class="login-button">Cerrar sesión</a>
+                </div>
+            </div>
         </nav>
 
-        <h1 class="text-center mt-8 text-[2rem] text-[rgb(95,22,24)] font-[600]">Administrador</h1>
+        <h1 class="text-center mt-8 text-[2rem] text-[rgb(95,22,24)] font-[600] mt-[130px]">Administrador</h1>
 
         <div class="w-full flex flex-col items-center gap-8 mt-10">
             <button class="w-[60%] h-[45px] p-2 mb-6 bg-[rgb(95,22,24)] text-white rounded-xl">Backup</button>
@@ -35,7 +90,12 @@
             <a class="w-[60%] h-[45px] p-3 mb-6 bg-[rgb(95,22,24)] text-white rounded-xl text-center" href="administrador.php">Stock</a>
             <a class="w-[60%] h-[45px] p-3 mb-6 bg-[rgb(95,22,24)] text-white rounded-xl text-center" href="confirmar_compra.php">Confirmar compra</a>
         </div>
+        <script>
+            document.querySelector('.menu-toggle').addEventListener('click', function() {
+                const menu = document.querySelector('.menu');
+                menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+            });
+        </script>
     </body>
-
 
 </html>

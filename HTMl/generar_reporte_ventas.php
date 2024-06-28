@@ -41,7 +41,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['fecha_inicio']) && iss
             .container {
                 max-width: 960px;
                 margin: 0 auto;
-                padding: 2rem;
             }
 
             .table {

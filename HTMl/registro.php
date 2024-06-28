@@ -23,7 +23,7 @@ session_start();
     }
 </style>
 
-<body class="w-full bg-gradient-to-b from-pink-300 via-pink-200 to-pink-100 overflow-x-hidden">
+<body class="w-full h-auto bg-gradient-to-b from-pink-300 via-pink-200 to-pink-100 overflow-x-hidden">
     <h1 class="text-center mt-8 text-2xl text-red-900 font-semibold">Registrarse</h1>
     
     <div class="w-full flex flex-col items-center mt-4">

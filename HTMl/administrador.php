@@ -88,17 +88,35 @@
 
     <section class="flex flex-col items-center gap-8 mt-10">
         <h2 class="text-center text-[1.5rem] text-[rgb(95,22,24)] font-[600]">Agregar Producto</h2>
-        <form action="agregar_productos.php" method="post" id="form-agregar-producto" class="flex flex-col gap-4 w-[80%] max-w-[400px]">
+        <form action="agregar_productos.php" method="post" id="form-agregar-producto" class="flex flex-col gap-4 w-[80%] max-w-[400px]" onsubmit="return validarFormulario()">
             <input type="text" id="nombre" name="nombre" placeholder="Nombre del Producto" class="p-2 border border-gray-300 rounded" required>
             <input type="text" id="descripcion" name="descripcion" placeholder="Descripción" class="p-2 border border-gray-300 rounded" required>
             <input type="text" id="imagen" name="imagen" placeholder="Nombre del Archivo de Imagen" class="p-2 border border-gray-300 rounded" required>
-            <input type="number" id="precio" name="precio" placeholder="Precio" class="p-2 border border-gray-300 rounded" required>
-            <input type="number" id="cantidad" name="cantidad" placeholder="Cantidad" class="p-2 border border-gray-300 rounded" required>
+            <input type="number" id="precio" name="precio" placeholder="Precio" class="p-2 border border-gray-300 rounded" required min="0">
+            <input type="number" id="cantidad" name="cantidad" placeholder="Cantidad" class="p-2 border border-gray-300 rounded" required min="0">
             <button type="submit" class="p-2 mb-6 bg-[rgb(95,22,24)] text-white rounded">Agregar Producto</button>
         </form>
     </section>
 
     <script>
+        // Validación del formulario en el frontend
+        function validarFormulario() {
+            const precio = document.getElementById('precio').value;
+            const cantidad = document.getElementById('cantidad').value;
+
+            if (precio < 0) {
+                alert('El precio no puede ser negativo.');
+                return false;
+            }
+
+            if (cantidad < 0) {
+                alert('La cantidad no puede ser negativa.');
+                return false;
+            }
+
+            return true;
+        }
+
         // Funciones para manejar el catálogo de productos
         function cargarCatalogo() {
             fetch('obtener_productos.php')
@@ -127,7 +145,7 @@
                                     <span class="text-xl text-[rgb(95,22,24)] font-[700]">$${item.precio}</span>
                                     <p class="text-[rgb(95,22,24)] font-[400]">${item.descripcion}</p>
                                     <p class="text-[rgb(95,22,24)] font-[400]">Cantidad: ${item.cantidad}</p>
-                                    <input type="number" id="cantidad-${item.id}" class="w-[80%] h-[30px] p-2 border border-gray-300 rounded" placeholder="Nueva Cantidad">
+                                    <input type="number" id="cantidad-${item.id}" class="w-[80%] h-[30px] p-2 border border-gray-300 rounded" placeholder="Nueva Cantidad" min="0">
                                     <button onclick="editarCantidad(${item.id})" class="w-[80%] h-[28px] bg-[rgb(95,22,24)] text-white rounded">Editar Cantidad</button>
                                 </div>
                             `;
@@ -199,33 +217,40 @@
         }
 
         function editarCantidad(id) {
-            const nuevaCantidad = document.getElementById(`cantidad-${id}`).value;
-            fetch('editar_cantidad.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ id, cantidad: nuevaCantidad })
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Error en la respuesta del servidor');
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.success) {
-                    alert('Cantidad actualizada exitosamente');
-                    cargarCatalogo();
-                } else {
-                    alert('Error al actualizar la cantidad: ' + data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error al actualizar la cantidad:', error);
-                alert('Error al actualizar la cantidad: ' + error.message);
-            });
+    const nuevaCantidad = document.getElementById(`cantidad-${id}`).value;
+    
+    if (nuevaCantidad < 0) {
+        alert('La cantidad no puede ser negativa.');
+        return;
+    }
+
+    fetch('editar_cantidad.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id, cantidad: nuevaCantidad })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error en la respuesta del servidor');
         }
+        return response.json();
+    })
+    .then(data => {
+        if (data.success) {
+            alert('Cantidad actualizada exitosamente');
+            cargarCatalogo();
+        } else {
+            alert('Error al actualizar la cantidad: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error al actualizar la cantidad:', error);
+        alert('Error al actualizar la cantidad: ' + error.message);
+    });
+}
+
 
         document.addEventListener("DOMContentLoaded", function() {
             cargarCatalogo();
