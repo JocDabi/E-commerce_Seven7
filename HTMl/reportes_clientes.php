@@ -16,7 +16,6 @@
             box-sizing: border-box;
         }
 
-
         .container {
             max-width: 600px;
             margin: 0 auto;
@@ -60,9 +59,15 @@
             border-color: #ee0101;
             box-shadow: 0 0 0 0.25rem rgba(238, 1, 1, 0.25);
         }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            display: none;
+        }
     </style>
 </head>
-<body  class="w-[100%] h-screen bg-gradient-to-b from-pink-400 via-pink-200 to-pink-100 overflow-x-hidden">
+<body class="w-[100%] h-screen bg-gradient-to-b from-pink-400 via-pink-200 to-pink-100 overflow-x-hidden">
     <nav class="flex justify-between">
         <a class="pt-10 pl-7" href="admin.html">
             <img class="w-[68px] h-[68px]" src="../images/Recurso 1.png" alt="">
@@ -70,7 +75,7 @@
     </nav>
     <div class="container bg-gray-200">
         <h1 class="text-center mb-5 text-2xl font-bold">Generar Reporte de Clientes por Fecha de Registro</h1>
-        <form action="generar_reporte_clientes.php" method="post">
+        <form id="reporte-clientes-form" action="generar_reporte_clientes.php" method="post">
             <div class="row mb-3">
                 <div class="col">
                     <label for="fecha_inicio" class="form-label">Fecha de Inicio:</label>
@@ -83,6 +88,7 @@
                 <div class="flex justify-center mt-8 text-white">
                     <button type="submit" class="btn btn-primary w-[200px] h-[80px] rounded-xl shadow-xl" name="submit">Generar Reporte de Clientes</button>
                 </div>
+                <p id="error-message" class="error-message">¡El formato de fecha ingresado no es valido...!.</p>
             </div>
         </form>
 
@@ -96,7 +102,17 @@
         ?>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById('reporte-clientes-form').addEventListener('submit', function(event) {
+            const fechaInicio = document.getElementById('fecha_inicio').value;
+            const fechaFin = document.getElementById('fecha_fin').value;
+            const fechaActual = new Date().toISOString().split('T')[0]; // Obtener la fecha actual en formato YYYY-MM-DD
+
+            if (fechaInicio > fechaActual || fechaFin < fechaActual) {
+                event.preventDefault(); // Evitar el envío del formulario
+                document.getElementById('error-message').style.display = 'block'; // Mostrar el mensaje de error
+            }
+        });
+    </script>
 </body>
 </html>

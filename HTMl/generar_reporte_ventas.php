@@ -122,6 +122,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['fecha_inicio']) && iss
                         <?php endwhile; ?>
                     </tbody>
                 </table>
+                <div class="download-btn">
+                    <a href="generar_reporte_ventas_pdf.php?fecha_inicio=<?php echo $fecha_inicio; ?>&fecha_fin=<?php echo $fecha_fin; ?>" target="_blank">Descargar Reporte en PDF</a>
+                </div>
             <?php else: ?>
                 <p class="text-center">No se encontraron ventas en el rango de fechas seleccionado.</p>
             <?php endif; ?>

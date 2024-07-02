@@ -58,6 +58,12 @@
             border-color: #ee0101;
             box-shadow: 0 0 0 0.25rem rgba(238, 1, 1, 0.25);
         }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            display: none;
+        }
     </style>
 </head>
 <body class="w-[100%] h-screen bg-gradient-to-b from-pink-400 via-pink-200 to-pink-100 overflow-x-hidden">
@@ -68,7 +74,7 @@
     </nav>
     <div class="container bg-gray-200">
         <h1 class="text-center mb-5 font-bold text-2xl">Generar Reportes de Ventas</h1>
-        <form action="generar_reporte_ventas.php" method="post">
+        <form id="reporte-ventas-form" action="generar_reporte_ventas.php" method="post">
             <div class="row mb-3">
                 <div class="flex flex-col">
                     <label for="fecha_inicio" class="form-label">Fecha de Inicio:</label>
@@ -81,8 +87,22 @@
                 <div class="flex justify-center mt-8 text-white">
                     <button type="submit" class="btn btn-primary w-[200px] h-[80px] rounded-xl shadow-xl" name="submit">Generar Reporte de Ventas</button>
                 </div>
+                <p id="error-message" class="error-message">¡El formato de fecha ingresado no es valido...!</p>
             </div>
         </form>
     </div>
+
+    <script>
+        document.getElementById('reporte-ventas-form').addEventListener('submit', function(event) {
+            const fechaInicio = document.getElementById('fecha_inicio').value;
+            const fechaFin = document.getElementById('fecha_fin').value;
+            const fechaActual = new Date().toISOString().split('T')[0]; // Obtener la fecha actual en formato YYYY-MM-DD
+
+            if (fechaInicio > fechaActual || fechaFin < fechaActual) {
+                event.preventDefault(); // Evitar el envío del formulario
+                document.getElementById('error-message').style.display = 'block'; // Mostrar el mensaje de error
+            }
+        });
+    </script>
 </body>
 </html>
