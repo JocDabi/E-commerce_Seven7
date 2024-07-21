@@ -35,7 +35,7 @@
             display: none;
             position: absolute;
             right: 0;
-            top: 100%;
+            top: 68px; /* Ajustar según la altura de tu barra de navegación */
             background: white;
             border: 1px solid #ccc;
             width: 200px;
@@ -80,12 +80,6 @@
         .swiper-container {
             width: 100%;
             box-sizing: border-box;
-        }
-
-        .swiper-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
         .swiper-slide {
