@@ -15,9 +15,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $imagen = trim($_POST['imagen'] ?? '');
     $cantidad = intval($_POST['cantidad'] ?? 0);
 
+    // Validar el nombre del archivo de imagen
+    $validExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+    $fileExtension = strtolower(pathinfo($imagen, PATHINFO_EXTENSION));
+
     // Validar que los campos obligatorios no estén vacíos
     if (empty($nombre) || empty($descripcion) || empty($imagen)) {
         $response['message'] = 'Por favor completa todos los campos obligatorios';
+    } elseif (!in_array($fileExtension, $validExtensions)) {
+        $response['message'] = 'El nombre del archivo de imagen debe terminar en .jpg, .jpeg, .png o .gif';
     } elseif ($precio === false || $precio < 0) {
         $response['message'] = 'El precio debe ser un número decimal positivo';
     } elseif ($cantidad < 0) {
