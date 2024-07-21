@@ -87,7 +87,7 @@
                 <div class="flex justify-center mt-8 text-white">
                     <button type="submit" class="btn btn-primary w-[200px] h-[80px] rounded-xl shadow-xl" name="submit">Generar Reporte de Ventas</button>
                 </div>
-                <p id="error-message" class="error-message">¡El formato de fecha ingresado no es valido...!</p>
+                <p id="error-message" class="error-message">¡La fecha seleccionada es incorrecta...! Ingrese una fecha correcta.</p>
             </div>
         </form>
     </div>
@@ -98,9 +98,13 @@
             const fechaFin = document.getElementById('fecha_fin').value;
             const fechaActual = new Date().toISOString().split('T')[0]; // Obtener la fecha actual en formato YYYY-MM-DD
 
-            if (fechaInicio > fechaActual || fechaFin < fechaActual) {
+            if (fechaInicio > fechaFin || fechaInicio > fechaActual || fechaFin > fechaActual) {
                 event.preventDefault(); // Evitar el envío del formulario
-                document.getElementById('error-message').style.display = 'block'; // Mostrar el mensaje de error
+                const errorMessage = document.getElementById('error-message');
+                errorMessage.style.display = 'block'; // Mostrar el mensaje de error
+                setTimeout(function() {
+                    errorMessage.style.display = 'none'; // Ocultar el mensaje de error después de 5 segundos
+                }, 5000);
             }
         });
     </script>

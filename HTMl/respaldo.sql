@@ -63,7 +63,7 @@ CREATE TABLE `comprobante` (
   KEY `Usuario_ID` (`Usuario_ID`),
   KEY `Productos_ID` (`Productos_ID`),
   CONSTRAINT `comprobante_ibfk_1` FOREIGN KEY (`Usuario_ID`) REFERENCES `usuario` (`ID_USUARIO`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,7 +72,7 @@ CREATE TABLE `comprobante` (
 
 LOCK TABLES `comprobante` WRITE;
 /*!40000 ALTER TABLE `comprobante` DISABLE KEYS */;
-INSERT INTO `comprobante` VALUES (3,'2024-06-27',100.00,17,0,'realizada'),(4,'2024-06-27',100.00,17,0,'realizada'),(5,'2024-06-27',100.00,17,0,'pendiente'),(6,'2024-06-27',55.00,14,0,'realizada'),(7,'2024-06-27',110.00,14,0,'realizada'),(8,'2024-06-29',120.00,19,0,'realizada'),(9,'2024-06-29',5.00,19,0,'pendiente'),(10,'2024-07-11',100.00,14,0,'pendiente'),(11,'2024-07-19',100.00,21,0,'pendiente');
+INSERT INTO `comprobante` VALUES (3,'2024-06-27',100.00,17,0,'realizada'),(4,'2024-06-27',100.00,17,0,'realizada'),(5,'2024-06-27',100.00,17,0,'pendiente'),(6,'2024-06-27',55.00,14,0,'realizada'),(7,'2024-06-27',110.00,14,0,'realizada'),(8,'2024-06-29',120.00,19,0,'realizada'),(9,'2024-06-29',5.00,19,0,'pendiente'),(10,'2024-07-11',100.00,14,0,'pendiente'),(11,'2024-07-19',100.00,21,0,'pendiente'),(12,'2024-07-20',30.00,14,0,'pendiente');
 /*!40000 ALTER TABLE `comprobante` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -94,7 +94,7 @@ CREATE TABLE `comprobante_producto` (
   KEY `Producto_ID` (`Producto_ID`),
   CONSTRAINT `comprobante_producto_ibfk_1` FOREIGN KEY (`Comprobante_ID`) REFERENCES `comprobante` (`ID_COMPROBANTE`) ON DELETE CASCADE,
   CONSTRAINT `comprobante_producto_ibfk_2` FOREIGN KEY (`Producto_ID`) REFERENCES `productos` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -103,7 +103,7 @@ CREATE TABLE `comprobante_producto` (
 
 LOCK TABLES `comprobante_producto` WRITE;
 /*!40000 ALTER TABLE `comprobante_producto` DISABLE KEYS */;
-INSERT INTO `comprobante_producto` VALUES (11,10,7,2,50.00),(12,11,7,2,50.00);
+INSERT INTO `comprobante_producto` VALUES (11,10,7,2,50.00),(12,11,7,2,50.00),(13,12,12,2,15.00);
 /*!40000 ALTER TABLE `comprobante_producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -125,7 +125,7 @@ CREATE TABLE `historial_compras` (
   KEY `Comprobante_ID` (`Comprobante_ID`),
   CONSTRAINT `historial_compras_ibfk_1` FOREIGN KEY (`Usuario_ID`) REFERENCES `usuario` (`ID_USUARIO`),
   CONSTRAINT `historial_compras_ibfk_2` FOREIGN KEY (`Comprobante_ID`) REFERENCES `comprobante` (`ID_COMPROBANTE`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -134,7 +134,7 @@ CREATE TABLE `historial_compras` (
 
 LOCK TABLES `historial_compras` WRITE;
 /*!40000 ALTER TABLE `historial_compras` DISABLE KEYS */;
-INSERT INTO `historial_compras` VALUES (1,'2024-06-27',100.00,17,4),(2,'2024-06-27',100.00,17,5),(3,'2024-06-27',55.00,14,6),(4,'2024-06-27',110.00,14,7),(5,'2024-06-29',120.00,19,8),(6,'2024-06-29',5.00,19,9),(7,'2024-07-11',100.00,14,10),(8,'2024-07-19',100.00,21,11);
+INSERT INTO `historial_compras` VALUES (1,'2024-06-27',100.00,17,4),(2,'2024-06-27',100.00,17,5),(3,'2024-06-27',55.00,14,6),(4,'2024-06-27',110.00,14,7),(5,'2024-06-29',120.00,19,8),(6,'2024-06-29',5.00,19,9),(7,'2024-07-11',100.00,14,10),(8,'2024-07-19',100.00,21,11),(9,'2024-07-20',30.00,14,12);
 /*!40000 ALTER TABLE `historial_compras` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -186,7 +186,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (7,'Blazer','Chaqueta formal de traje',50.00,'blazer.png',5),(8,'Blusa Negra','Blusa negra de vestir, elegante y versátil.',60.00,'blusa.png',10),(11,'Blusa negra','Blusa negra de manga, sofisticada y fresca, ideal para un look elegante y casual.',45.00,'blusa negra.png',10),(12,'Falda Negra','Falda negra corta, elegante y moderna.',15.00,'falda negra.png',9),(14,'Pantalón Negro','Pantaló negro de vestir, cómodo para cualquier ocasión.',30.00,'pantalon.png',30),(15,'Short de Jean','Short de jean corto, casual y cómodo, perfecto para un look relajado y moderno.',12.00,'short.png',15),(17,'Pantalón Rosado','Pantaló rosado de vestir, cómodo para cualquier ocasión.',30.00,'rosadi.png',20),(19,'Vestido Plateado','Vestido plateado de vestir, cómodo para cualquier ocasión.',50.00,'vestido blanco.png',15),(20,'Sujetador Triangulo Bordados','Sujetador Triangular con tirantes finos ajustables.',11.00,'sosten blanco.png',10),(21,'Top Bikini Aros Estampado','Top bikini con aros. Tirantes finos ajustables.',20.00,'sosten rosado.png',20),(22,'Falda Pantalón Bordada Hojas','Falda Pantalón en tiro alto con nudo delantero.',19.00,'falda.png',20),(23,'Sandalia Tacón Satinada','Zapato tipo sandalia de tacón alto con efecto satinado.',14.00,'zapato rosa.png',13);
+INSERT INTO `productos` VALUES (7,'Blazer','Chaqueta formal de traje',50.00,'blazer.png',5),(8,'Blusa Negra','Blusa negra de vestir, elegante y versátil.',60.00,'blusa.png',10),(12,'Falda Negra','Falda negra corta, elegante y moderna.',15.00,'falda negra.png',9);
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -232,4 +232,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-18 23:48:11
+-- Dump completed on 2024-07-20 23:35:48

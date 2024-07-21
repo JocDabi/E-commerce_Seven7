@@ -89,6 +89,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['fecha_inicio']) && iss
             .text-center {
                 text-align: center;
             }
+
+            .download-btn a {
+                display: inline-block;
+                padding: 10px 20px;
+                margin-top: 20px;
+                background-color: #5f1618;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 5px;
+                transition: background-color 0.3s;
+            }
+
+            .download-btn a:hover {
+                background-color: #941b1d;
+            }
         </style>
     </head>
     <body class="w-[100%] h-screen bg-gradient-to-b from-pink-400 via-pink-200 to-pink-100 overflow-x-hidden">
@@ -122,7 +137,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['fecha_inicio']) && iss
                         <?php endwhile; ?>
                     </tbody>
                 </table>
-                <div class="download-btn">
+                <div class="download-btn text-center">
                     <a href="generar_reporte_ventas_pdf.php?fecha_inicio=<?php echo $fecha_inicio; ?>&fecha_fin=<?php echo $fecha_fin; ?>" target="_blank">Descargar Reporte en PDF</a>
                 </div>
             <?php else: ?>

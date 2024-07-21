@@ -7,15 +7,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Verificar y obtener datos del formulario
     $nombre = trim($_POST['nombre'] ?? '');
     $descripcion = trim($_POST['descripcion'] ?? '');
-    $precio = floatval($_POST['precio'] ?? 0);
+    
+    // Validar y convertir el precio a float
+    $precio_raw = $_POST['precio'] ?? '';
+    $precio = filter_var($precio_raw, FILTER_VALIDATE_FLOAT);
+    
     $imagen = trim($_POST['imagen'] ?? '');
     $cantidad = intval($_POST['cantidad'] ?? 0);
 
     // Validar que los campos obligatorios no estén vacíos
     if (empty($nombre) || empty($descripcion) || empty($imagen)) {
         $response['message'] = 'Por favor completa todos los campos obligatorios';
-    } elseif ($precio < 0) {
-        $response['message'] = 'El precio no puede ser negativo';
+    } elseif ($precio === false || $precio < 0) {
+        $response['message'] = 'El precio debe ser un número decimal positivo';
     } elseif ($cantidad < 0) {
         $response['message'] = 'La cantidad no puede ser negativa';
     } else {

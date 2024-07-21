@@ -92,7 +92,7 @@
             <input type="text" id="nombre" name="nombre" placeholder="Nombre del Producto" class="p-2 border border-gray-300 rounded" required>
             <input type="text" id="descripcion" name="descripcion" placeholder="Descripción" class="p-2 border border-gray-300 rounded" required>
             <input type="text" id="imagen" name="imagen" placeholder="Nombre del Archivo de Imagen" class="p-2 border border-gray-300 rounded" required>
-            <input type="number" id="precio" name="precio" placeholder="Precio" class="p-2 border border-gray-300 rounded" required min="0">
+            <input type="number" id="precio" name="precio" placeholder="Precio" class="p-2 border border-gray-300 rounded" required min="0" step="any">
             <input type="number" id="cantidad" name="cantidad" placeholder="Cantidad" class="p-2 border border-gray-300 rounded" required min="0">
             <button type="submit" class="p-2 mb-6 bg-[rgb(95,22,24)] text-white rounded">Agregar Producto</button>
         </form>
@@ -103,14 +103,25 @@
         function validarFormulario() {
             const precio = document.getElementById('precio').value;
             const cantidad = document.getElementById('cantidad').value;
-
+            const imagen = document.getElementById('imagen').value;
+            
+            // Validación de precio
             if (precio < 0) {
                 alert('El precio no puede ser negativo.');
                 return false;
             }
 
+            // Validación de cantidad
             if (cantidad < 0) {
                 alert('La cantidad no puede ser negativa.');
+                return false;
+            }
+
+            // Validación del nombre del archivo de imagen
+            const validExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+            const fileExtension = imagen.split('.').pop().toLowerCase();
+            if (!validExtensions.includes(fileExtension)) {
+                alert('El nombre del archivo de imagen debe terminar en .jpg, .jpeg, .png o .gif.');
                 return false;
             }
 
@@ -217,40 +228,39 @@
         }
 
         function editarCantidad(id) {
-    const nuevaCantidad = document.getElementById(`cantidad-${id}`).value;
-    
-    if (nuevaCantidad < 0) {
-        alert('La cantidad no puede ser negativa.');
-        return;
-    }
+            const nuevaCantidad = document.getElementById(`cantidad-${id}`).value;
+            
+            if (nuevaCantidad < 0) {
+                alert('La cantidad no puede ser negativa.');
+                return;
+            }
 
-    fetch('editar_cantidad.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ id, cantidad: nuevaCantidad })
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Error en la respuesta del servidor');
+            fetch('editar_cantidad.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id, cantidad: nuevaCantidad })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error en la respuesta del servidor');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    alert('Cantidad actualizada exitosamente');
+                    cargarCatalogo();
+                } else {
+                    alert('Error al actualizar la cantidad: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error al actualizar la cantidad:', error);
+                alert('Error al actualizar la cantidad: ' + error.message);
+            });
         }
-        return response.json();
-    })
-    .then(data => {
-        if (data.success) {
-            alert('Cantidad actualizada exitosamente');
-            cargarCatalogo();
-        } else {
-            alert('Error al actualizar la cantidad: ' + data.message);
-        }
-    })
-    .catch(error => {
-        console.error('Error al actualizar la cantidad:', error);
-        alert('Error al actualizar la cantidad: ' + error.message);
-    });
-}
-
 
         document.addEventListener("DOMContentLoaded", function() {
             cargarCatalogo();

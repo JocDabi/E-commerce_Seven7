@@ -102,7 +102,7 @@ session_start();
 
             <div class="flex items-center w-full pl-20 mt-2">
                 <input class="mr-2" type="checkbox" id="privacidad" required> 
-                <label class="text-sm text-red-900" for="privacidad">He leído y estoy de acuerdo con las <a href="#" class="underline">políticas de privacidad.</a></label>
+                <label class="text-sm text-red-900" for="privacidad">He leído y estoy de acuerdo con las <a href="politicas_privacidad.html" class="underline">políticas de privacidad.</a></label>
             </div>
 
             <button class="w-36 h-10 rounded-full bg-red-900 text-white font-semibold transition-all active:bg-transparent active:border-4 active:border-red-900 active:text-red-900" type="submit">Registrarse</button>
